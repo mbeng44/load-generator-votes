@@ -1,0 +1,22 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator-votes
+  labels:
+    app: mbeng44/load-generator-votes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mbeng44/load-generator-votes
+  template:
+    metadata:
+      labels:
+        app: mbeng44/ load-generator-votes
+    spec:
+      containers:
+      - name: load-generator-votes
+        image: mbeng44/load-generator-votes:latest
+        ports:
+        - containerPort: 80
