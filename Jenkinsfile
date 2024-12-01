@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/Primus-Learning/load-generator-vote.git'
+                git branch: 'main', url: 'https://github.com/mbeng44/load-generator-vote.git'
             }
         }
 
