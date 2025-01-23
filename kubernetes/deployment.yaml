@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lgv
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lgv
+  template:
+    metadata:
+      labels:
+        app: lgv
+    spec:
+      containers:
+      - name: lgv
+        image: mbeng44/load:v6
+        ports:
+        - containerPort: 80
