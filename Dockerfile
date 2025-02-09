@@ -13,4 +13,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN python make-data.py
 
 # Specify the command to run the application
-CMD ["python", "make-data.py"]  # Replace "app.py" with your main application script
+CMD ["python", "make-data.py"]  
