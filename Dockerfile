@@ -1,15 +1,16 @@
 FROM python:3.9-slim
 
-# add apache bench (ab) tool
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    apache2-utils \
-    && rm -rf /var/lib/apt/lists/*
-
+# Set the working directory
 WORKDIR /seed
 
+# Copy the application code
 COPY . .
 
-# create POST data files with ab friendly formats
+# Install dependencies (if you have a requirements.txt file)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Create POST data files with ab friendly formats
 RUN python make-data.py
 
+# Specify the command to run the application
+CMD ["python", "make-data.py"]  # Replace "app.py" with your main application script
