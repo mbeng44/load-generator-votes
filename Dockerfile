@@ -1,18 +1,16 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 as build
+FROM python:3.9-slim
 
-WORKDIR /source
-COPY *.csproj .
-RUN dotnet restore -a amd64
+# add apache bench (ab) tool
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    apache2-utils \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /seed
 
 COPY . .
-RUN dotnet publish -c release -o /app -a amd64 --self-contained false --no-restore
 
-# app image
-FROM mcr.microsoft.com/dotnet/runtime:7.0
-WORKDIR /app
-COPY --from=build /app .
+# create POST data files with ab friendly formats
+RUN python make-data.py
 
-# Install apache2-utils for ab
-RUN apt-get update && apt-get install -y apache2-utils
-
-ENTRYPOINT ["dotnet", "Worker.dll"]
+CMD /seed/generate-votes.sh
