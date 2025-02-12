@@ -9,8 +9,16 @@ RUN apt-get update \
 WORKDIR /seed
 
 COPY . .
+<<<<<<< HEAD
 
 # create POST data files with ab friendly formats
 RUN python make-data.py
+=======
+
+# create POST data files with ab friendly formats
+RUN python make-data.py
+
+CMD /seed/generate-votes.sh
+>>>>>>> refs/remotes/origin/main
 
 CMD /seed/generate-votes.sh
