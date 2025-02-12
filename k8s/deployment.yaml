@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: lgv-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: lgv
@@ -28,5 +28,5 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 80
+    targetPort: 8084
 

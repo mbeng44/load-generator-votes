@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lgv-scripts
+  namespace: capstone
+data:
+  make-data.py: |
+    # this creates urlencode-friendly files without EOL
+    import urllib.parse
+
+    outfile = open('postb', 'w')
+    params = ({ 'vote': 'b' })
+    encoded = urllib.parse.urlencode(params)
+    outfile.write(encoded)
+    outfile.close()
+    outfile = open('posta', 'w')
+    params = ({ 'vote': 'a' })
+    encoded = urllib.parse.urlencode(params)
+    outfile.write(encoded)
+    outfile.close()
+  generate-votes.sh: |
+    #!/bin/sh
+
+    # create 3000 votes (2000 for option a, 1000 for option b)
+    ab -n 1000 -c 50 -p posta -T "application/x-www-form-urlencoded" http://vote/
+    ab -n 1000 -c 50 -p postb -T "application/x-www-form-urlencoded" http://vote/
+    ab -n 1000 -c 50 -p posta -T "application/x-www-form-urlencoded" http://vote/
