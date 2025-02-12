@@ -22,7 +22,7 @@ RUN chmod +x make-data.py
 RUN python3 make-data.py
 
 # Expose the application port (change if needed)
-EXPOSE 5000
+EXPOSE 8084
 
 # Run the application (modify command based on your framework)
 CMD ["python3", "make-data.py"]
